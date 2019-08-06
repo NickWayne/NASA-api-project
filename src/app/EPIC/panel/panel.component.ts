@@ -13,6 +13,7 @@ export class PanelComponent implements OnInit {
   manualStep = false;
   currentDate = new Date();
   interval = setInterval(() => {}, 10000);
+  imageType = 'natural';
   constructor(private ApiService: NasaApiService) { }
 
   changeStep() {
@@ -35,7 +36,7 @@ export class PanelComponent implements OnInit {
     this.currentDate = date;
     this.manualStep = false;
     clearInterval(this.interval);
-    this.ApiService.getEpic(date)
+    this.ApiService.getEpic(date, this.imageType)
       .then(images => {
         this.data = images;
         this.maxNumber = images.length - 1;

@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { NasaApiService } from 'src/app/services/nasa-api.service';
 
 @Component({
-  selector: 'app-panel',
-  templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.css']
+  selector: 'app-epic',
+  templateUrl: './epic.component.html',
+  styleUrls: ['./epic.component.css']
 })
-export class PanelComponent implements OnInit {
+
+export class EpicComponent implements OnInit {
   data = [];
   selected = 0;
   maxNumber = 0;
   manualStep = false;
-  currentDate = new Date();
+  currentDate = new Date(2019, 5, 4);
   interval = setInterval(() => {}, 10000);
   imageType = 'natural';
   constructor(private ApiService: NasaApiService) { }
@@ -47,6 +48,7 @@ export class PanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createGlobe(new Date());
+    this.createGlobe(new Date(2019, 5, 4));
   }
 }
+

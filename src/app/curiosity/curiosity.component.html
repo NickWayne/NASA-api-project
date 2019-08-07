@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col">
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" required [min]='minDate' [max]='maxDate' (dateChange)='getRoverImages(dateInput.value, roverSelect.value, cameraSelect.value)' [(ngModel)]="date" #dateInput>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
+        </mat-form-field><br/>
+        <mat-form-field>
+            <mat-label>Rover Choice</mat-label>
+            <mat-select [value]='rovers[0]' (selectionChange)='getRoverImages(dateInput.value, roverSelect.value, cameraSelect.value, true)' #roverSelect>
+                <mat-option *ngFor="let rover of rovers" [value]='rover'>{{rover}}</mat-option>
+            </mat-select>
+        </mat-form-field><br/>
+        <mat-form-field>
+            <mat-label>{{ roverSelect.value }} Cameras</mat-label>
+            <mat-select value='all' (selectionChange)='getRoverImages(dateInput.value, roverSelect.value, cameraSelect.value)' #cameraSelect>
+                <mat-option value='all'>All Cameras</mat-option>
+                <mat-option *ngFor="let camera of roverTypes[roverSelect.value].Cameras" [value]='camera'>{{camera}}</mat-option>
+            </mat-select>
+        </mat-form-field><br/>
+        <p *ngIf="data.length > 0"> {{ selected }} / {{ data.length }} images</p>
+        <button mat-raised-button (click)='toggleAnimation()'>{{ manualStep ? 'Start' : 'Stop'}} The Animation</button>
+      </div>
+    <div class="col">
+        <p *ngIf="data.length == 0">No images for this day :(</p>
+        <img *ngFor="let imageName of data; let i = index" [hidden]="i!=selected" src="{{ imageName }}">
+    </div>
+</div>

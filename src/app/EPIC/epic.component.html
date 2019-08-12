@@ -9,7 +9,7 @@
             <mat-radio-button value="natural">Natural Image</mat-radio-button>
             <mat-radio-button value="enhanced">Enhanced Image</mat-radio-button>
         </mat-radio-group><br/>
-        <mat-checkbox id="manualStep" (change)='changeStep()' [(ngModel)]='manualStep'>{{ manualStep ? 'Start Animation' : 'Stop Animation' }}</mat-checkbox><br/>
+        <button mat-raised-button (click)='toggleAnimation()'>{{ manualStep ? 'Start' : 'Stop'}} The Animation</button><br/>
         <button mat-raised-button (click)='downFrame()' *ngIf='manualStep'><i class="material-icons">arrow_back</i></button>
         <button mat-raised-button (click)='upFrame()' *ngIf='manualStep'><i class="material-icons">arrow_forward</i></button><br />
     </div>

@@ -17,11 +17,13 @@ export class EpicComponent implements OnInit {
   imageType = 'natural';
   constructor(private ApiService: NasaApiService) { }
 
-  changeStep() {
-    if (this.manualStep) {
-      clearInterval(this.interval);
-    } else {
-      this.createGlobe(this.currentDate);
+  toggleAnimation() {
+    this.manualStep = !this.manualStep;
+    clearInterval(this.interval);
+    if (!this.manualStep) {
+      this.interval = setInterval(() => {
+        this.selected = this.selected + 1 > this.maxNumber ? 0 : this.selected + 1;
+      }, 4000 / this.maxNumber);
     }
   }
 

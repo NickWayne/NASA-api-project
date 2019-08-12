@@ -18,8 +18,12 @@
                 <mat-option *ngFor="let camera of roverTypes[roverSelect.value].Cameras" [value]='camera'>{{camera}}</mat-option>
             </mat-select>
         </mat-form-field><br/>
-        <p *ngIf="data.length > 0"> {{ selected }} / {{ data.length }} images</p>
-        <button mat-raised-button (click)='toggleAnimation()'>{{ manualStep ? 'Start' : 'Stop'}} The Animation</button>
+        <label for='imageLength'>Time per frame: {{timePerImage}} second{{timePerImage !== 1 ? 's' : ''}}</label><br/>
+        <mat-slider color='primary' name='imageLength' thumbLabel min="0.1" max="5" step='.1' [(ngModel)]='timePerImage' (change)='updateInterval()'></mat-slider>
+        <p> {{ selected }} / {{ data.length }} images</p>
+        <button mat-raised-button (click)='toggleAnimation()'>{{ manualStep ? 'Start' : 'Stop'}} The Animation</button><br/>
+        <button mat-raised-button (click)='downFrame()' *ngIf='manualStep'><i class="material-icons">arrow_back</i></button>
+        <button mat-raised-button (click)='upFrame()' *ngIf='manualStep'><i class="material-icons">arrow_forward</i></button><br />
       </div>
     <div class="col">
         <p *ngIf="data.length == 0">No images for this day :(</p>

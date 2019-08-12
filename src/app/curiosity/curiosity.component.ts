@@ -73,6 +73,22 @@ export class CuriosityComponent implements OnInit {
     }
   }
 
+  updateInterval() {
+    this.manualStep = false;
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      this.selected = this.selected + 1 > this.maxNumber ? 0 : this.selected + 1;
+    }, this.timePerImage * 1000);
+  }
+
+  upFrame() {
+    this.selected = this.selected + 1 > this.maxNumber ? 0 : this.selected + 1;
+  }
+
+  downFrame() {
+    this.selected = this.selected - 1 < 0 ? this.maxNumber : this.selected - 1;
+  }
+
   getRoverImages(date: Date, roverName: string, cameraName: string, roverChange: boolean = false) {
     this.manualStep = false;
     this.selected = 0;

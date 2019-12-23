@@ -42,4 +42,33 @@ export class NasaApiService {
                     });
   }
 
+  public getAPOD() {
+    const dateInput = moment(new Date());
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${this.API_KEY}`;
+    return fetch(url).then(res => res.json())
+                    .then(json => {
+                      return json;
+                    });
+  }
+
+  public getApollo(apolloType: string, surface: boolean) {
+    const apolloSearchInfo = {
+      'Apollo 11': [1969, 1969, 'Apollo 11'],
+      'Apollo 12': [1969, 1969, 'Apollo 12'],
+      'Apollo 13': [1970, 1970, 'Apollo 13'],
+      'Apollo 14': [1971, 1971, 'Apollo 14'],
+      'Apollo 15': [1971, 1971, 'Apollo 15'],
+      'Apollo 16': [1972, 1972, 'Apollo 16'],
+      'Apollo 17': [1972, 1972, 'Apollo 17'],
+    }[apolloType];
+    let url = `https://images-api.nasa.gov/search?keywords=${apolloSearchInfo[2]}`;
+    if (surface) {
+      url += ',lunar surface';
+    }
+    url += `&year_start=${apolloSearchInfo[0]}&year_end=${apolloSearchInfo[1]}&media_type=image`;
+    return fetch(url).then(res => res.json())
+                    .then(json => {
+                      return json.collection;
+                    });
+  }
 }

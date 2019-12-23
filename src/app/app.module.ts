@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { EpicComponent } from './EPIC/epic.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CuriosityComponent } from './curiosity/curiosity.component';
+import { ApolloComponent } from './apollo/apollo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EpicComponent,
     LandingPageComponent,
-    CuriosityComponent
+    CuriosityComponent,
+    ApolloComponent
   ],
   imports: [
     BrowserModule,

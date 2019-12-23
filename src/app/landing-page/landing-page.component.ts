@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NasaApiService } from '../services/nasa-api.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  apodUrl = '';
+  mediatype = '';
+
+  constructor(private ApiService: NasaApiService, public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.ApiService.getAPOD().then(json => {
+                                    this.apodUrl = json.url;
+                                    this.mediatype = json.media_type;
+                                    console.log(this.apodUrl);
+                                  });
   }
 
 }

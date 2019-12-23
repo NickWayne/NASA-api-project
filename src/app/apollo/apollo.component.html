@@ -1,0 +1,21 @@
+<div class="col">
+    <mat-form-field>
+        <mat-label>landing Choice</mat-label>
+        <mat-select [value]='landings[0]' (selectionChange)='getApolloData(landingSelect.value, surfaceImages)' #landingSelect>
+            <mat-option *ngFor="let landing of landings" [value]='landing'>{{landing}}</mat-option>
+        </mat-select>
+    </mat-form-field><br/>
+    <button mat-raised-button (click)='toggleImageType()'>{{ imageType == 'orig' ? 'Original' : 'Thumbnail'}} image</button><br/>
+    <button mat-raised-button (click)='toggleSurface(landingSelect.value)'>{{ surfaceImages ? 'Surface Images' : 'All Images'}}</button><br/>
+    <label for='imageLength'>Time per frame: {{timePerImage}} second{{timePerImage !== 1 ? 's' : ''}}</label><br/>
+    <mat-slider color='primary' name='imageLength' thumbLabel 
+    min="0.1" max="5" step='.1' [(ngModel)]='timePerImage' (change)='updateInterval()'></mat-slider>
+    <p> {{ selected }} / {{ images.length }} images</p>
+    <button mat-raised-button (click)='toggleAnimation()'>{{ manualStep ? 'Start' : 'Stop'}} The Animation</button><br/>
+    <button mat-raised-button (click)='downFrame()' *ngIf='manualStep'><i class="material-icons">arrow_back</i></button>
+    <button mat-raised-button (click)='upFrame()' *ngIf='manualStep'><i class="material-icons">arrow_forward</i></button><br />
+  </div>
+<div class="col">
+    <img *ngFor="let imageUrl of images; let i = index" *ngIf="i !== selected" src="{{ imageUrl }}~{{ imageType }}.jpg">
+</div>
+

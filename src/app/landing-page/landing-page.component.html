@@ -1,1 +1,3 @@
-<p>landing-page works!</p>
+<p>NASA Astronomy Picture of the Day: </p>
+<img *ngIf="mediatype !== 'video'" src="{{ apodUrl }}">
+<iframe width="1200" height="600" *ngIf="mediatype === 'video'" [src]='sanitizer.bypassSecurityTrustResourceUrl(apodUrl)'></iframe>

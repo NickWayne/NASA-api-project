@@ -16,6 +16,6 @@
     <button mat-raised-button (click)='upFrame()' *ngIf='manualStep'><i class="material-icons">arrow_forward</i></button><br />
   </div>
 <div class="col">
-    <img *ngFor="let imageUrl of images; let i = index" src="{{ imageUrl }}~{{ imageType }}.jpg">
+    <img *ngFor="let imageUrl of images; let i = index" [hidden]="i !== selected" src="{{ imageUrl }}~{{ imageType }}.jpg">
 </div>
 
